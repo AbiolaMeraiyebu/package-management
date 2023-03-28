@@ -8,10 +8,9 @@
 useradd nexus
 #4 Give sudo access to nexus user
 sudo echo "nexus ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/nexus
+sudo hostnamectl set-hostname nexus
 sudo su - nexus
 cd /opt
-
-
 # 1.Install prerequisit: JAVA, git, unzip
 sudo yum install wget git nano unzip -y
 sudo yum install java-11-openjdk-devel java-1.8.0-openjdk-devel -y
@@ -19,7 +18,8 @@ sudo yum install java-11-openjdk-devel java-1.8.0-openjdk-devel -y
 # sudo wget http://download.sonatype.com/nexus/3/nexus-3.15.2-01-unix.tar.gz
 sudo wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
 sudo tar -xvf nexus.tar.gz
-mv /opt/nexus-3* /opt/nexus
+sudo mv /opt/nexus-3* /opt/nexus
+sudo rm-rf /opt
 #5 Change the owner and group permissions to /opt/nexus and /opt/sonatype-work directories.
 sudo chown -R nexus:nexus /opt/nexus
 sudo chown -R nexus:nexus /opt/sonatype-work
